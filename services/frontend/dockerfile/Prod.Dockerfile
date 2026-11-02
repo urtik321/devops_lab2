@@ -38,7 +38,7 @@ RUN npm run build
 # по запросу отдавать файлы или переадресовывать
 # запросы на сервер backend.
 # конфигурация nginx лежит в файле nginx.conf
-
+FROM nginx:latest
 
 # создаём директорию для записи логов
 RUN mkdir /var/www \
@@ -47,4 +47,4 @@ RUN mkdir /var/www \
 # TODO: в самую последнюю очередь копируем
 # транспилированный код из папки /app/dist слоя сборки
 # в папку для nginx из слоя выполнения. /ush/share/nginx/html
-
+COPY --from=vite-builder /app/dist /usr/share/nginx/html
